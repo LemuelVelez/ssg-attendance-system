@@ -75,10 +75,6 @@ Ensure the system is responsive and optimized for mobile devices to facilitate e
    NEXT_PUBLIC_APPWRITE_PROJECT_ID=your_project_id
    NEXT_PUBLIC_APPWRITE_DATABASE_ID=your_database_id
    NEXT_PUBLIC_APPWRITE_BUCKET_ID=your_bucket_id
-   NEXT_PUBLIC_GOOGLE_CLIENT_ID=your_google_client_id
-   NEXT_PUBLIC_GOOGLE_CLIENT_SECRET=your_google_client_secret
-   NEXT_PUBLIC_FACEBOOK_CLIENT_ID=your_facebook_client_id
-   NEXT_PUBLIC_FACEBOOK_CLIENT_SECRET=your_facebook_client_secret
    ```
 
 4. Run the application:
