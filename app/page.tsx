@@ -58,6 +58,12 @@ export default function Home() {
                 ),
                 text: "Check-in offline and sync when online.",
               },
+              {
+                icon: (
+                  <MdCheckCircle className="text-blue-400 mr-3" size={24} />
+                ),
+                text: "Track absences and customize fines.",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={index}
