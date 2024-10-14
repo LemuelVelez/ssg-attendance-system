@@ -86,7 +86,7 @@ export default function Home() {
           {/* Admin Sign In Link */}
           <div className="flex justify-center mt-4">
             <Link
-              href="/admin"
+              href="/admin/signin"
               className="flex items-center text-white underline"
             >
               <HiLockClosed className="text-blue-400 mr-2" size={24} />

@@ -1,98 +1,129 @@
 # Attendance and Participation Tracking System for SSG
 
-## Objective
-Design and implement a web application for the Supreme Student Government (SSG) to manage attendance at events and meetings efficiently. The system generates unique QR codes for each event, allowing students to check in by scanning these codes with any QR code scanner. Each student will also have a personal QR code that verifies their identity. The application provides automatic attendance reports, including the ability to export them as PDF or CSV files, while ensuring offline functionality that syncs data when a connection is restored.
+## Overview
+
+This project is a web application designed for the Supreme Student Government (SSG) to efficiently manage attendance at events and meetings. It utilizes unique QR code generation for events and students, enabling a streamlined check-in process and real-time attendance tracking. The system also supports customizable fines for student absences and provides automatic attendance reports. 
+
+The app ensures offline functionality and includes anti-cheating measures to prevent unauthorized check-ins. Additionally, the system is mobile-friendly, making it easy for students and administrators to interact with.
 
 ## Features
 
-### Core Features
-1. **Event QR Code Generation**  
-   Generate unique QR codes for each event or meeting that includes essential details such as event ID, event name, and a timestamp for when the code was created.
+### 1. Event and Personal QR Code Generation
+- **Event QR Code Generation:** Automatically generate QR codes for each event, containing essential details like event ID and timestamp.
+- **Personal QR Code Generation:** Each student gets a unique personal QR code to verify their identity for attendance check-ins.
 
-2. **Personal QR Code Generation**  
-   Generate a unique personal QR code for each student based on their registered information (e.g., student ID, name). This QR code serves as an identity verification method when checking in to events.
+### 2. QR Code Scanning
+- Supports check-in through scanning event and personal QR codes with any mobile or handheld QR code scanner.
 
-3. **QR Code Scanning**  
-   Allow students to check in by scanning the event QR code followed by their personal QR code using any QR code scanner (mobile or handheld). This process does not require students to log in to the app, ensuring ease of access.
+### 3. Attendance Reports
+- Automatically generates attendance reports, including event details, attendees, and timestamps.
+- Export attendance data in **PDF** or **CSV** formats.
 
-4. **Attendance Reports**  
-   Automatically generate attendance reports based on check-ins. Reports include event details, a list of attendees (identified by their personal QR codes), and their check-in timestamps. The report is exportable in formats like PDF and CSV.
+### 4. Offline Functionality
+- Students can check in even without internet access. Data syncs to the server once the connection is restored.
 
-5. **Offline Functionality**  
-   Allow students to check in even without an internet connection, storing data locally and syncing it with the server once the connection is restored.
+### 5. Anti-Cheating Measures
+- **Kiosk Scanning:** Controls are set to prevent multiple scans by the same student in different locations.
+- **Time-limited access:** Check-ins can only occur within the pre-defined time window for each event.
 
-6. **Time-Limited Access**  
-   Implement a customizable time limit for attendance. After the specified time for an event has elapsed, students will be unable to check in, automatically marking them as absent.
+### 6. Absence Fines Management
+- Admins can set customizable fines for student absences. Fines can vary for different events or students.
+- The system tracks and calculates accumulated fines for each student based on their absences.
 
-### Anti-Cheating Measures
-1. **Kiosk Scanning**  
-   Set up dedicated attendance kiosks or stations where students must scan their personal QR codes. This ensures scanning occurs in a controlled environment, reducing the chances of one student scanning multiple QR codes.
-
-2. **Single Scan Per Student**  
-   Limit the scanning of personal QR codes to one scan per event. Once a student's QR code is scanned and marked present, they cannot use it again for that event.
-
-3. **Physical Presence Verification**  
-   Require students to be physically present at the event location to scan their QR codes. The system will deny any attempts to mark attendance from outside the event.
-
-4. **Monitoring Attendance Timing**  
-   Log the time when each QR code is scanned to ensure that it aligns with the event time. This will help identify any discrepancies, and any scans outside of the allowed time will be flagged.
-
-5. **Notifications to Students**  
-   Notify students of the time limits and attendance procedures in advance (e.g., via announcements or the app). Consider sending reminders as the event time approaches to ensure they are aware of when they need to scan.
-
-### Mobile-Friendly
-Ensure the system is responsive and optimized for mobile devices to facilitate easy QR code scanning and attendance reporting.
+### 7. Mobile-Friendly
+- The system is responsive and optimized for use on mobile devices, ensuring that QR code scanning and attendance tracking can be performed seamlessly on smartphones and tablets.
 
 ## Tech Stack
-- **Frontend:**  
-  - Next.js: For server-side rendering and a React-based frontend.  
-  - Shadcn UI: For UI components.  
-  - Tailwind CSS: For styling.  
-  - Framer Motion: For animations.  
-  - TypeScript: For type-safe development.  
 
-- **Backend:**  
-  - Appwrite: For database management, authentication, and file storage.  
-  - Node.js: For server-side logic and handling QR code generation and scanning processes.
+### Frontend
+- **Next.js:** For server-side rendering and a React-based frontend.
+- **Shadcn UI:** For UI components.
+- **Tailwind CSS:** For styling.
+- **Framer Motion:** For animations.
+- **TypeScript:** For type safety and better development experience.
 
-## Installation
+### Backend
+- **Appwrite:** Used for database management, authentication, and file storage.
+- **Node.js:** Powers server-side logic, handles QR code generation, scanning processes, and attendance fine tracking.
+
+## Installation and Setup
+
+### Prerequisites
+- Node.js (v14 or later)
+- NPM or Yarn
+- Appwrite Cloud or Self-hosted Appwrite instance
+
+### Steps to Install and Run the Project:
 
 1. Clone the repository:
+
    ```bash
-   git clone https://github.com/yourusername/attendance-tracking-ssg.git
-   cd attendance-tracking-ssg
+   git clone https://github.com/your-username/attendance-ssg.git
    ```
 
-2. Install dependencies:
+2. Navigate to the project folder:
+
+   ```bash
+   cd attendance-ssg
+   ```
+
+3. Install dependencies:
+
    ```bash
    npm install
    ```
 
-3. Set up environment variables:
-   Create a `.env.local` file and add your environment variables, such as:
-   ```plaintext
-   NEXT_PUBLIC_APPWRITE_ENDPOINT=https://cloud.appwrite.io/v1
-   NEXT_PUBLIC_APPWRITE_PROJECT_ID=your_project_id
-   NEXT_PUBLIC_APPWRITE_DATABASE_ID=your_database_id
-   NEXT_PUBLIC_APPWRITE_BUCKET_ID=your_bucket_id
+4. Set up Appwrite:
+   - Create a project on Appwrite (either self-hosted or cloud version).
+   - Configure your database for storing attendance, QR code data, user authentication, and absences.
+
+5. Create a `.env.local` file in the root directory and configure it with the following details:
+
+   ```bash
+   NEXT_PUBLIC_APPWRITE_PROJECT_ID=your_appwrite_project_id
+   NEXT_PUBLIC_APPWRITE_ENDPOINT=your_appwrite_endpoint
+   NEXT_PUBLIC_APPWRITE_API_KEY=your_appwrite_api_key
    ```
 
-4. Run the application:
+6. Run the application:
+
    ```bash
    npm run dev
    ```
 
-## Usage
-- Navigate to the application in your browser to access the attendance system.
-- Generate event QR codes and personal QR codes as needed.
-- Students can scan QR codes to check in to events and view their attendance records.
+   The app should now be running on `http://localhost:3000`.
+
+### Deploy to Vercel
+
+1. Push your code to GitHub:
+
+   ```bash
+   git add .
+   git commit -m "Initial commit"
+   git push origin main
+   ```
+
+2. Connect your GitHub repository to [Vercel](https://vercel.com/).
+
+3. Set the required environment variables in your Vercel project’s settings.
+
+4. Deploy the application from the Vercel dashboard.
+
+## How to Use the Application
+
+### Admin
+1. **Login** using admin credentials.
+2. **Create Events** with auto-generated QR codes.
+3. **Manage Attendance Reports**: View attendance, download reports, and calculate fines for absences.
+4. **Set Absence Fines**: Customize fine amounts for each student or event.
+
+### Student
+1. **Scan Event QR Code** and **Personal QR Code** at the start of the event.
+2. **Check-in** will be processed, and attendance data will sync to the server when online.
+3. **View Absence Records** and fines (if applicable).
 
 ## Contributing
-Contributions are welcome! Please fork the repository and create a pull request for any enhancements or bug fixes.
+Feel free to open issues or create pull requests. Contributions are welcome!
 
 ## License
 This project is licensed under the MIT License.
-
-## Acknowledgments
-- Thanks to the Supreme Student Government (SSG) for the inspiration and support in developing this project.
-- Special thanks to the developers and contributors of the libraries and tools used in this project.
